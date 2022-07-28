@@ -18,9 +18,7 @@ public class MainManager : MonoBehaviour
     private int m_Points;
     
     private bool m_GameOver = false;
-
-    
-    // Start is called before the first frame update
+        
     void Start()
     {
         const float step = 0.6f;
@@ -37,15 +35,14 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
-        // Highscore
+
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.LoadHighscore();
             UpdateHighscoreText();
         }
         else 
         {
-            highscoreText.text = "Error: GameManager is null";
+            highscoreText.text = "Err: GameManager is null";
         }
     }
 
@@ -77,10 +74,9 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
-        if (m_Points > GameManager.Instance.highscore)
+        if (GameManager.Instance != null) 
         {
-            GameManager.Instance.highscore = m_Points;
-            GameManager.Instance.highscoreUsername = GameManager.Instance.username;
+            GameManager.Instance.AddNewScore(m_Points);
             UpdateHighscoreText();
         }
     }
@@ -89,12 +85,11 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
-        GameManager.Instance.SaveHighscore();
     }
 
-    void UpdateHighscoreText() 
+    void UpdateHighscoreText()
     {
-        highscoreText.text = $"Highscore: {GameManager.Instance.highscoreUsername} " +
-                $"= {GameManager.Instance.highscore}";
+        GameManager.Score scoreToBeat = GameManager.Instance.GetScoreToBeat(m_Points);
+        highscoreText.text = $"Highscore: {scoreToBeat.username} = {scoreToBeat.value}";
     }
 }

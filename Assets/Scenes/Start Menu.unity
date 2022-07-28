@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca58b63e115a244397a88c1922e85ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  username: unknown user
 --- !u!4 &214233859
 Transform:
   m_ObjectHideFlags: 0
@@ -533,6 +534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96bebe5e02f37dd44baec164bba6ebcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usernameInput: {fileID: 93487346}
+  startButton: {fileID: 1940336929}
 --- !u!1 &551531616
 GameObject:
   m_ObjectHideFlags: 0

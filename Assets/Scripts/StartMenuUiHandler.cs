@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class StartMenuUiHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] TextMeshProUGUI usernameInputText;
+    [SerializeField] Button startButton;
 
-    // Update is called once per frame
-    void Update()
+    public void StartNewGame()
     {
-        
+        if (usernameInputText.text.Length > 1)
+        {
+            GameManager.Instance.username = usernameInputText.text;
+        }
+        SceneManager.LoadScene(1);
     }
 }

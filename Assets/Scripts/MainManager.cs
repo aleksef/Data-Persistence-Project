@@ -10,7 +10,8 @@ public class MainManager : MonoBehaviour
     public int LineCount = 6;
     public Rigidbody Ball;
 
-    public Text ScoreText;
+    [SerializeField] Text ScoreText;
+    [SerializeField] Text ScoreboardText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -36,6 +37,11 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+        // Scoreboard
+        if (GameManager.Instance != null)
+        {
+            ScoreboardText.text = GameManager.Instance.username;
+        }        
     }
 
     private void Update()

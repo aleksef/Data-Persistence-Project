@@ -81,15 +81,20 @@ public class MainManager : MonoBehaviour
         }
     }
 
+    void UpdateHighscoreText()
+    {
+        GameManager.Score scoreToBeat = GameManager.Instance.GetScoreToBeat(m_Points);
+        highscoreText.text = $"Highscore: {scoreToBeat.username} = {scoreToBeat.value}";
+    }
+
     public void GameOver()
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
     }
 
-    void UpdateHighscoreText()
+    public void GoToStartMenu()
     {
-        GameManager.Score scoreToBeat = GameManager.Instance.GetScoreToBeat(m_Points);
-        highscoreText.text = $"Highscore: {scoreToBeat.username} = {scoreToBeat.value}";
+        SceneManager.LoadScene(0);
     }
 }

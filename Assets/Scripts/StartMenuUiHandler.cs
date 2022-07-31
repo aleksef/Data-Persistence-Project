@@ -29,6 +29,11 @@ public class StartMenuUiHandler : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    public void GoToSettings()
+    {
+        SceneManager.LoadScene(3);
+    }
+
     public void Quit()
     {
 #if UNITY_EDITOR

@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        else
+        if (currentVal > lowestTobeat.value)
         {
             lowestTobeat.username = username;
             lowestTobeat.value = currentVal;

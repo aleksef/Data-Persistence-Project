@@ -39,6 +39,10 @@ public class HighscoresManager : MonoBehaviour
         {
             string newLine = $"{i+1}. {highscores[i].username} = ";
             newLine += $"{highscores[i].value} <br>";
+            if (i == 0) 
+            {
+                newLine = $"<b>{newLine}</b>";
+            }
             text += newLine;
         }
 

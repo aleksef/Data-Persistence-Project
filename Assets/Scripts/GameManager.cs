@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
             string json = File.ReadAllText(path);
             Highscores highscoresFromFile = JsonUtility.FromJson<Highscores>(json);
             highscores = highscoresFromFile.data;
+            Debug.Log("Saved scores loaded.");
         }
         else 
         {
@@ -116,28 +117,4 @@ public class GameManager : MonoBehaviour
         }
         return highestScore;
     }
-
-    /*
-    public Score GetScoreToBeat(int currentVal)
-    {
-        Score lowestTobeat = new Score{value = 0};
-
-        if (highscores.Count > 0)
-        {
-            foreach (Score score in highscores)
-            {
-                if (currentVal < score.value && score.value > lowestTobeat.value)
-                {
-                    lowestTobeat = score;
-                }
-            }
-        }
-        if (currentVal > lowestTobeat.value)
-        {
-            lowestTobeat.username = username;
-            lowestTobeat.value = currentVal;
-        }
-        return lowestTobeat;
-    }
-    */
 }

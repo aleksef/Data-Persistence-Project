@@ -91,6 +91,7 @@ public class MainManager : MonoBehaviour
         {
             GameManager.Instance.AddNewScore(m_Points);
             UpdateHighscoreText();
+            GameManager.Instance.SaveHighscores();
         }
     }
 

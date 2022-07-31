@@ -74,23 +74,24 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
-        if (GameManager.Instance != null) 
-        {
-            GameManager.Instance.AddNewScore(m_Points);
-            UpdateHighscoreText();
-        }
     }
 
     void UpdateHighscoreText()
     {
-        GameManager.Score scoreToBeat = GameManager.Instance.GetScoreToBeat(m_Points);
-        highscoreText.text = $"Highscore: {scoreToBeat.username} = {scoreToBeat.value}";
+        GameManager.Score highestScore = GameManager.Instance.GetHighestScore();
+        highscoreText.text = $"Highscore: {highestScore.username} " +
+            $"= {highestScore.value}";
     }
 
     public void GameOver()
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AddNewScore(m_Points);
+            UpdateHighscoreText();
+        }
     }
 
     public void GoToStartMenu()

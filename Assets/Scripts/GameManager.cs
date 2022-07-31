@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     public void SaveHighscores()
     {
         Highscores highscoresForSave = new Highscores();
-        highscoresForSave.data = highscores;
+        highscoresForSave.data = GameManager.Instance.highscores;
         string json = JsonUtility.ToJson(highscoresForSave);
         File.WriteAllText(Application.persistentDataPath + "/savefile_highscores.json", json);
     }
@@ -62,16 +62,17 @@ public class GameManager : MonoBehaviour
     public void AddNewScore(int newValue) 
     {
         Score lowestScore = GetLowestScore();
+
         if (newValue > lowestScore.value)
         {
             Score newScore = new Score();
             newScore.value = newValue;
             newScore.username = username;
-            highscores.Add(newScore);
+            GameManager.Instance.highscores.Add(newScore);
 
-            if (highscores.Count > 10 && highscores.Contains(lowestScore)) 
+            if (GameManager.Instance.highscores.Count > 10 && GameManager.Instance.highscores.Contains(lowestScore)) 
             { 
-                highscores.Remove(lowestScore);
+                GameManager.Instance.highscores.Remove(lowestScore);
             }
         }
     }
@@ -82,9 +83,9 @@ public class GameManager : MonoBehaviour
         lowestScore.username = "Uknown";
         lowestScore.value = 42069;
 
-        if (highscores.Count > 0)
+        if (GameManager.Instance.highscores.Count > 0)
         {
-            foreach (Score score in highscores)
+            foreach (Score score in GameManager.Instance.highscores)
             {
                 if (score.value < lowestScore.value) { lowestScore = score; }
             }
@@ -96,6 +97,27 @@ public class GameManager : MonoBehaviour
         return lowestScore;
     }
 
+    public Score GetHighestScore()
+    {
+        Score highestScore = new Score();
+        highestScore.username = "Uknown";
+        highestScore.value = 0;
+
+        if (GameManager.Instance.highscores.Count > 0)
+        {
+            foreach (Score score in GameManager.Instance.highscores)
+            {
+                if (score.value > highestScore.value) { highestScore = score; }
+            }
+        }
+        else
+        {
+            highestScore.value = 0;
+        }
+        return highestScore;
+    }
+
+    /*
     public Score GetScoreToBeat(int currentVal)
     {
         Score lowestTobeat = new Score{value = 0};
@@ -117,4 +139,5 @@ public class GameManager : MonoBehaviour
         }
         return lowestTobeat;
     }
- }
+    */
+}

@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
         LoadHighscores();
     }
 
@@ -40,9 +39,7 @@ public class GameManager : MonoBehaviour
     {
         Highscores highscoresForSave = new Highscores();
         highscoresForSave.data = highscores;
-
         string json = JsonUtility.ToJson(highscoresForSave);
-
         File.WriteAllText(Application.persistentDataPath + "/savefile_highscores.json", json);
     }
 
@@ -53,7 +50,6 @@ public class GameManager : MonoBehaviour
         {
             string json = File.ReadAllText(path);
             Highscores highscoresFromFile = JsonUtility.FromJson<Highscores>(json);
-
             highscores = highscoresFromFile.data;
         }
         else 
@@ -102,7 +98,6 @@ public class GameManager : MonoBehaviour
 
     public Score GetScoreToBeat(int currentVal)
     {
-        ////// WRONG
         Score lowestTobeat = new Score{value = 0};
 
         if (highscores.Count > 0)
@@ -120,7 +115,6 @@ public class GameManager : MonoBehaviour
             lowestTobeat.username = username;
             lowestTobeat.value = currentVal;
         }
-
         return lowestTobeat;
     }
  }
